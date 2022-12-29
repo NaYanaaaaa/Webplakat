@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>algorithmicartexhibition</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script type="text/javascript" src="processing\processing.js"></script>
+
+  </head>
+
+
+  <body>
+
+
+<div class="main-container">
+
+  <!-- первый грид -->
+  <img class="pink" src="images/3d1.png" alt="">
+  <div class="first">
+  <div class="logo">
+  <img src="images/logo.png" alt="" class="logon">
+  <p class="text1">Музей нейронного <br>искусства Neoписуемое</p>
+  <img src="images/aitext.svg" alt="" class="codtext">
+  </div>
+
+  <div class="circles">
+  <div class="circles_anim krugi"></div>
+  <p class="text2">В музее нейронного искусства «Neoписуемое» открылась выставка работ, созданных интеллектуальными системами. Здесь становится реальностью то, о чем думают ИИ, у каждого автора есть свой характер, фирменный стиль, и собственное видение мира. Приглашаем вас познакомиться с творчеством интеллекта, равного человеческому.</p>  </div>
+  <div class="lines">
+    <img src="images/waves1.svg" alt="" class="wav1">
+    <img src="images/waves2.svg" alt="" class="wav2">
+  </div>
+  <div class="grid">
+    <script type="text/processing">
+      color bg = #19E672;
+      color fg = #FF56FF;
+
+      void setup() {
+        size(450, 450);
+      }
+
+      void draw() {
+        background(bg);
+        fill(fg);
+        noStroke();
+
+        float tilesX = 10;
+        float tilesY = tilesX;
+
+        float tileW = width / tilesX;
+        float tileH = height / tilesY;
+
+        for (int x = 0; x < tilesX; x++) {
+          for (int y = 0; y < tilesY; y++) {
+            float posX = tileW * x;
+            float posY = tileH * y;
+
+            float wave = sin(radians(frameCount + x * 10 + y * 10));
+            float mappedWave = map(wave,-1,1,0,5);
+
+            int selector = int(mappedWave);
+
+            pushMatrix();
+            translate(posX, posY);
+            if (selector == 0) {
+              arc(0, 0, tileW*2, tileH*2, radians(0), radians(90));
+            } else if (selector == 1) {
+              arc(tileW, 0, tileW*2, tileH*2, radians(90), radians(180));
+            } else if (selector == 2) {
+              arc(tileW, tileH, tileW*2, tileH*2, radians(180), radians(270));
+            } else if (selector == 3) {
+              arc(0, tileH, tileW*2, tileH*2, radians(270), radians(360));
+            } else {
+              rect(0, 0, tileW, tileH);
+            }
+
+            popMatrix();
+          }
+        }
+      }
+
+    </script>
+    <canvas id="sketch" style="border:1px solid black"></canvas>
+
+  </div>
+</div>
+
+<img class="head" src="images/head.svg" alt="">
+
+<!-- заголовок -->
+<div class="header">
+
+  <!-- <img class="exhibit" src="images/выставка.svg" alt="">
+  <h1 class="header1">алгоритмическое</h1>
+  <h1 class="star verhvniz">*</h1>
+  <h1 class="header2">искусство</h1>
+  <img src="images/stroke.svg" alt="" class="whitest">
+  <img src="images/greenstroke.svg" alt="" class="greenst"> -->
+</div>
+
+<!-- второй грид -->
+<div class="second">
+  <div class="cubes"></div>
+  <div class="headersmall">
+    <p>algorithmic art</p>
+  </div>
+  <div class="anim">
+  display: flex;
+
+    <script type="text/processing">
+    Particle[] particles;
+
+
+    int am = 600;
+
+
+    void setup(){
+      size(500, 500);
+      noStroke();
+      particles = new Particle[am];
+      for(int i = 0; i < am; i++){
+        particles[i] = new Particle(new PVector(0, 0), i);
+      }
+    }
+
+
+    void draw(){
+      background(#000000);
+      translate(width/2, height/2);
+      for(int i = 0; i < am; i++){
+        particles[i].draw();
+        particles[i].move();
+      }
+      for(int i = 0; i < am; i++){
+        particles[i].drawMid();
+        particles[i].move();
+      }
+        for(int i = 0; i < am; i++){
+        particles[i].drawMid2();
+        particles[i].move();
+      }
+    }
+
+
+    class Particle{
+      PVector loc, vel;
+      float a, s, radius;
+
+      Particle(PVector l, float i){
+        loc = l;
+        a = i;
+        s = random(200, 250);
+      }
+
+      void draw(){
+        radius = map(dist(loc.x, loc.y, 0, 0), 0, 150, 30, 1);
+        fill(255, 86, 255);
+        ellipse(loc.x*2.3, loc.y*2.3, radius, radius);
+      }
+
+      void drawMid(){
+        fill(1, 1, 197);
+        ellipse(loc.x*1.5, loc.y*1.5, radius-2, radius-2);
+      }
+
+      void drawMid2(){
+        fill(25, 230, 114);
+        ellipse(loc.x*0.8, loc.y*0.8, radius-4, radius-4);
+      }
+
+      void move(){
+        float r = sin(radians(frameCount*(s/200)));
+        vel = new PVector(sin(radians(a))*r, cos(radians(a))*r);
+        vel.mult(1.2);
+        loc.add(vel);
+      }
+    }
+    </script>
+    <canvas id="sketch" style="border:1px solid black"></canvas></div>
+  <div class="figures">
+    <img src="images/f1.svg" alt="">
+    <img src="images/f2.svg" alt="">
+    <img src="images/f3.svg" alt="">
+    <img src="images/f4.svg" alt="">
+    <img src="images/f5.svg" alt="">
+    <img src="images/f6.svg" alt="">
+    <img src="images/f7.svg" alt="">
+    <img src="images/f8.svg" alt="">
+    <img src="images/f9.svg" alt="">
+    <img src="images/f10.svg" alt="">
+    <img src="images/f11.svg" alt="">
+    <img src="images/f12.svg" alt="">
+    <img src="images/f13.svg" alt="">
+  </div>
+  <div class="waves camslide"></div>
+  <div class="text">
+    <p>Artificial <br> Intelligence <br> Artist</p>
+    <p>B0RNT0L1V3</p>
+  </div>
+  <div class="triangles">
+    <img class="squares" src="images/squares.svg" alt="">
+    <img class="sharp" src="images/sharp.svg" alt="">
+  </div>
+  <div class="green gosnake">
+
+
+  </div>
+  <div class="tride"><iframe src='https://my.spline.design/untitled-7b2567e10586ae1844ae38443c02746c/' frameborder='0' width='100%' height='100%'></iframe></div>
+  <div class="dots dominodots"></div>
+  <div class="anim2">
+    <script type="text/processing">
+    float x, y;
+    float xStep = 100;
+    float yStep = 50;
+    float a, a_;
+    int num;
+
+    void setup() {
+      size (705, 496);
+      num = int((width/xStep)*(height/yStep));
+    }
+
+    void draw() {
+      background(#000000);
+      strokeCap(CORNER);
+      strokeWeight(xStep);
+
+      int n=0;
+      while (n<num) {
+        stroke(255-255*cos(radians(a)),1*cos(radians(a)),255-197*sin(radians(a)),255-197*sin(radians(a)));
+        line(x ,y ,x , y+yStep);
+        x+=xStep;
+        if (x>width) {
+          x=xStep/2;
+          y+=yStep;
+        }
+        if (y>=height) {
+          y=0;
+          a=0;
+        }
+        n++;
+        a+=a_;
+      }
+      a_+=0.2;
+    }
+
+    </script>
+    <canvas id="sketch" style="border:1px solid black"></canvas>
+  </div>
+  <div class="waves2 camslide2"></div>
+  <div class="podval">
+    <p>Нарыйаана Парникова</p>
+    <p>Б22Д310</p>
+    <p>HSE ART AND <br>DESIGN SCHOOL</p>
+  </div>
+  </div>
+
+
+</div>
+  </body>
+</html>
